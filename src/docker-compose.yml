@@ -1,0 +1,161 @@
+version: "3.8"
+
+services:
+  # Base images - these build first
+  dotnet-sdk-base:
+    image: studentsystem/dotnet-sdk-base:1.0
+    build:
+      context: .
+      dockerfile: dotnet-sdk-base-dockerfile
+
+  dotnet-aspnet-base:
+    image: studentsystem/dotnet-aspnet-base:1.0
+    build:
+      context: .
+      dockerfile: dotnet-aspnet-base-dockerfile
+
+  dotnet-runtime-base:
+    image: studentsystem/dotnet-runtime-base:1.0
+    build:
+      context: .
+      dockerfile: dotnet-runtime-base-dockerfile
+
+  # API Services
+  studentmanagementapi:
+    image: studentsystem/studentmanagementapi:1.0
+    build:
+      context: .
+      dockerfile: StudentManagementAPI/Dockerfile
+      args:
+        - SERVICE_FOLDER=StudentManagementAPI
+        - CSPROJ_NAME=StudentManagementAPI.csproj
+        - DLL_NAME=StudentManagementAPI.dll
+    ports:
+      - "5100:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+
+  coursemanagementapi:
+    image: studentsystem/coursemanagementapi:1.0
+    build:
+      context: .
+      dockerfile: CourseManagementAPI/Dockerfile
+      args:
+        - SERVICE_FOLDER=CourseManagementAPI
+        - CSPROJ_NAME=CourseManagementAPI.csproj
+        - DLL_NAME=CourseManagementAPI.dll
+    ports:
+      - "5200:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+
+  enrollmentmanagementapi:
+    image: studentsystem/enrollmentmanagementapi:1.0
+    build:
+      context: .
+      dockerfile: EnrollmentManagementAPI/Dockerfile
+      args:
+        - SERVICE_FOLDER=EnrollmentManagementAPI
+        - CSPROJ_NAME=EnrollmentManagementAPI.csproj
+        - DLL_NAME=EnrollmentManagementAPI.dll
+    ports:
+      - "5300:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+
+  # WebApp Frontend
+  webapp:
+    image: studentsystem/webapp:1.0
+    build:
+      context: .
+      dockerfile: WebApp/Dockerfile
+      args:
+        - SERVICE_FOLDER=WebApp
+        - CSPROJ_NAME=WebApp.csproj
+        - DLL_NAME=WebApp.dll
+    ports:
+      - "7000:8080"
+    depends_on:
+      - studentmanagementapi
+      - coursemanagementapi
+      - enrollmentmanagementapi
+
+  # Worker Services
+  notificationservice:
+    image: studentsystem/notificationservice:1.0
+    build:
+      context: .
+      dockerfile: NotificationService/Dockerfile
+      args:
+        - SERVICE_FOLDER=NotificationService
+        - CSPROJ_NAME=NotificationService.csproj
+        - DLL_NAME=NotificationService.dll
+    depends_on:
+      - rabbitmq
+
+  tuitionservice:
+    image: studentsystem/tuitionservice:1.0
+    build:
+      context: .
+      dockerfile: TuitionService/Dockerfile
+      args:
+        - SERVICE_FOLDER=TuitionService
+        - CSPROJ_NAME=TuitionService.csproj
+        - DLL_NAME=TuitionService.dll
+    depends_on:
+      - rabbitmq
+
+  timeservice:
+    image: studentsystem/timeservice:1.0
+    build:
+      context: .
+      dockerfile: TimeService/Dockerfile
+      args:
+        - SERVICE_FOLDER=TimeService
+        - CSPROJ_NAME=TimeService.csproj
+        - DLL_NAME=StudentSystem.TimeService.dll
+    depends_on:
+      - rabbitmq
+
+  auditlogservice:
+    image: studentsystem/auditlogservice:1.0
+    build:
+      context: .
+      dockerfile: AuditlogService/Dockerfile
+      args:
+        - SERVICE_FOLDER=AuditlogService
+        - CSPROJ_NAME=AuditlogService.csproj
+        - DLL_NAME=AuditlogService.dll
+    depends_on:
+      - rabbitmq
+
+  enrollmenteventhandler:
+    image: studentsystem/enrollmenteventhandler:1.0
+    build:
+      context: .
+      dockerfile: EnrollmentEventHandler/Dockerfile
+      args:
+        - SERVICE_FOLDER=EnrollmentEventHandler
+        - CSPROJ_NAME=EnrollmentEventHandler.csproj
+        - DLL_NAME=EnrollmentEventHandler.dll
+    depends_on:
+      - rabbitmq
+      - sqlserver
+
+  # Infrastructure
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Your_password123
+    ports:
+      - "1433:1433"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"

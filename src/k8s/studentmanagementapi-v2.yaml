@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: studentmanagementapi
+    version: "2.0"
+  name: studentmanagementapi-v2
+  namespace: student-management-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentmanagementapi
+      version: "2.0"
+  template:
+    metadata:
+      labels:
+        app: studentmanagementapi
+        version: "2.0"
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        image: student-management-system/studentmanagementapi:2.0
+        imagePullPolicy: IfNotPresent
+        name: studentmanagementapi
+        ports:
+        - containerPort: 5100
+      restartPolicy: Always

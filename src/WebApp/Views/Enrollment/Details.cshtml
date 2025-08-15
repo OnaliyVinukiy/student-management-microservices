@@ -1,0 +1,62 @@
+﻿@model StudentSystem.WebApp.ViewModels.EnrollmentManagementDetailsViewModel
+@{
+    ViewData["Title"] = "Planning Details";
+}
+
+<h3 id="PageTitle">Enrollment Management - details</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">Date :</td>
+            <td><b>@Model.Date.ToString("dd-MM-yyyy")</b></td>
+        </tr>
+        <tr>
+            <td width="150">Status :</td>
+            <td id="JobStatus"><b>@Model.Enrollment.Status</b></td>
+        </tr>
+        <tr>
+            <td width="150">Start time :</td>
+            <td><b>@Model.Enrollment.StartTime.ToString("HH:mm")</b></td>
+        </tr>
+        <tr>
+            <td width="150">End time :</td>
+            <td><b>@Model.Enrollment.EndTime.ToString("HH:mm")</b></td>
+        </tr>
+        <tr>
+            <td width="150">Description :</td>
+            <td><b>@Model.Enrollment.Description</b></td>
+        </tr>
+        <tr>
+            <td width="150">Course :</td>
+            <td><b><a href='@(Url.Action("Details", "CourseManagement", new { courseCode = Model.Enrollment.Course.CourseCode }))'>@Model.Enrollment.Course.Brand @Model.Enrollment.Course.Type [@Model.Enrollment.Course.CourseCode]</a></b></td>
+        </tr>
+        <tr>
+            <td width="150">Owner :</td>
+            <td><b><a href='@(Url.Action("Details", "StudentManagement", new { id = Model.Enrollment.Student.StudentId }))'>@Model.Enrollment.Student.Name [@Model.Enrollment.Student.TelephoneNumber]</a></b></td>
+        </tr>
+        @if (Model.Enrollment.Status != "Planned")
+        {
+            <tr>
+                <td width="150">Actual Start time :</td>
+                <td><b>@Model.Enrollment.ActualStartTime</b></td>
+            </tr>
+            <tr>
+                <td width="150">Actual End time :</td>
+                <td><b>@Model.Enrollment.ActualEndTime</b></td>
+            </tr>
+            <tr>
+                <td width="150">Mechanic notes :</td>
+                <td><b>@Model.Enrollment.Notes</b></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<span><a id="BackButton" asp-action="Index" asp-controller="EnrollmentManagement" asp-route-planningDate="@Model.Date.ToString("yyyy-MM-dd")" class="btn btn-default">Back</a></span>
+@if (Model.Enrollment.Status != "Completed" )
+{ 
+    <span><a id="CompleteButton" asp-action="Finish" asp-controller="EnrollmentManagement" asp-route-planningDate="@Model.Date.ToString("yyyy-MM-dd")" asp-route-jobId="@Model.Enrollment.Id" class="btn btn-default">Complete</a></span>
+}
+
+
+

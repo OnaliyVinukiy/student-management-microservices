@@ -1,0 +1,13 @@
+global using StudentSystem.StudentManagementAPI.Commands;
+global using StudentSystem.StudentManagementAPI.Events;
+global using StudentSystem.StudentManagementAPI.Model;
+global using StudentSystem.StudentManagementAPI.DataAccess;
+global using StudentSystem.StudentManagementAPI.Mappers;
+global using StudentSystem.Infrastructure.Messaging;
+global using StudentSystem.Infrastructure.Messaging.Configuration;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Serilog;
+global using Polly;
+global using Microsoft.OpenApi.Models;
+global using Microsoft.AspNetCore.Mvc;

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tuitionservice
+    version: "1.0"
+  name: tuitionservice
+  namespace: student-management-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tuitionservice
+      version: "1.0"
+  template:
+    metadata:
+      labels:
+        app: tuitionservice
+        version: "1.0"
+    spec:
+      containers:
+      - env:
+        - name: DOTNET_ENVIRONMENT
+          value: Production
+        image: student-management-system/tuitionservice:1.0
+        imagePullPolicy: IfNotPresent
+        name: tuitionservice
+      restartPolicy: Always

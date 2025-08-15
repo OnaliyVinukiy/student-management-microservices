@@ -1,0 +1,37 @@
+﻿@model StudentSystem.WebApp.ViewModels.CourseManagementNewViewModel
+@{
+    ViewData["Title"] = "Register Course";
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+<h3 id="PageTitle">Course Management - register course</h3>
+
+<form asp-controller="CourseManagement" asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="Course.CourseCode"></label>
+        <input asp-for="Course.CourseCode" type="text" class="form-control" />
+        <span asp-validation-for="Course.CourseCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Course.Brand"></label>
+        <input asp-for="Course.Brand" type="text" class="form-control" />
+        <span asp-validation-for="Course.Brand" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Course.Type"></label>
+        <input asp-for="Course.Type" type="text" class="form-control" />
+        <span asp-validation-for="Course.Type" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Course.OwnerId"></label>
+        <select asp-for="SelectedStudentId" asp-items="Model.Students" class="form-control"></select>
+        <span asp-validation-for="SelectedStudentId" class="text-danger"></span>
+    </div>
+    <span><button id="SubmitButton" type="submit" class="btn btn-default">Register</button></span>
+    <span><a id="CancelButton" asp-action="Index" asp-controller="CourseManagement" class="btn btn-default">Cancel</a></span>
+</form>
+
+

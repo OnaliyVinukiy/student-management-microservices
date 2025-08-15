@@ -1,0 +1,33 @@
+﻿@model StudentSystem.WebApp.ViewModels.EnrollmentViewModel
+@{
+    ViewData["Title"] = "Enrollment Management";
+}
+
+<h1>Enrollments for Term: @Model.Term.Id</h1>
+<hr />
+
+<p><a asp-action="New" class="btn btn-primary">Enroll a student in a course</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Enrollment ID</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Term.Enrollments)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Student?.FullName (@item.Student?.StudentId)</td>
+                <td>@item.Course?.CourseName (@item.Course?.CourseCode)</td>
+                <td>@item.Status</td>
+                <td>@item.Grade</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model StudentSystem.WebApp.ViewModels.CourseManagementViewModel
+@{
+    ViewData["Title"] = "Courses Overview";
+}
+<h3 id="PageTitle">Course Management - overview</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>License No.</th>
+            <th>Brand</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.Courses)
+        {
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "CourseManagement", new { courseCode = course.CourseCode }))'">
+                <td>@course.CourseCode</td>
+                <td>@course.Brand</td>
+                <td>@course.Type</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a id="RegisterCourseButton" asp-action="New" asp-controller="CourseManagement" class="btn btn-default">Register course</a>
+
+

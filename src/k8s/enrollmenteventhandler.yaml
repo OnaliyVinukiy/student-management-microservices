@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: enrollmenteventhandler
+    version: "1.0"
+  name: enrollmenteventhandler
+  namespace: student-management-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enrollmenteventhandler
+      version: "1.0"
+  template:
+    metadata:
+      labels:
+        app: enrollmenteventhandler
+        version: "1.0"
+    spec:
+      containers:
+      - env:
+        - name: DOTNET_ENVIRONMENT
+          value: Production
+        image: student-management-system/enrollmenteventhandler:1.0
+        imagePullPolicy: IfNotPresent
+        name: enrollmenteventhandler
+      restartPolicy: Always

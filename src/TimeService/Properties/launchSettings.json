@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TimeService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

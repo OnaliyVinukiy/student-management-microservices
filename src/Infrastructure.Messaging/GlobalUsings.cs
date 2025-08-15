@@ -1,0 +1,13 @@
+global using System.Text;
+global using System.Threading.Tasks; 
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Newtonsoft.Json;
+global using Newtonsoft.Json.Converters;
+global using Newtonsoft.Json.Linq;
+global using Newtonsoft.Json.Serialization;
+global using Polly;
+global using Serilog;
+global using System.Runtime.Serialization;
+global using RabbitMQ.Client;
+global using RabbitMQ.Client.Events;

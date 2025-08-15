@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: studentmanagementapi
+  name: studentmanagementapi
+  namespace: student-management-system
+spec:
+  type: NodePort
+  ports:
+  - name: "http-5100"
+    port: 5100
+    targetPort: 5100
+    nodePort: 30005
+  selector:
+    app: studentmanagementapi
+    version: "1.0"

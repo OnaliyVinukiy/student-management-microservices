@@ -1,0 +1,31 @@
+﻿@model StudentSystem.WebApp.ViewModels.StudentManagementViewModel
+@{
+    ViewData["Title"] = "Student Management";
+}
+
+<h1>Student Management</h1>
+<hr />
+
+<p><a asp-action="New" class="btn btn-primary">Register new student</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Email Address</th>
+            <th>Date of Birth</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Students)
+        {
+            <tr>
+                <td>@item.StudentId</td>
+                <td>@item.FullName</td>
+                <td>@item.EmailAddress</td>
+                <td>@item.DateOfBirth.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

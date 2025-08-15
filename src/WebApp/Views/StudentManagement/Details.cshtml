@@ -1,0 +1,44 @@
+﻿@model StudentSystem.WebApp.ViewModels.StudentManagementDetailsViewModel
+@{
+    ViewData["Title"] = "Student Details";
+}
+<h3 id="PageTitle">Student Management - details</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">Name :</td>
+            <td><b>@Model.Student.Name</b></td>
+        </tr>
+        <tr>
+            <td width="150">Address :</td>
+            <td><b>@Model.Student.Address</b></td>
+        </tr>
+        <tr>
+            <td width="150">City :</td>
+            <td><b>@Model.Student.City</b></td>
+        </tr>
+        <tr>
+            <td width="150">Postalcode :</td>
+            <td><b>@Model.Student.PostalCode</b></td>
+        </tr>
+        <tr>
+            <td width="150">Telephonenumber :</td>
+            <td><b>@Model.Student.TelephoneNumber</b></td>
+        </tr>
+        <tr>
+            <td width="150">Emailaddress :</td>
+            <td><b>@Model.Student.EmailAddress</b></td>
+        </tr>
+        @if (Model.Student.LoyaltyLevel.HasValue)
+        {
+            string imagePath = $"/images/{Model.Student.LoyaltyLevel}.png";
+            <tr>
+                <td width="150">LoyaltyLevel :</td>
+                <td><img src="@imagePath" /></td>
+            </tr>        
+        }
+    </tbody>
+</table>
+<span><a id="BackButton" asp-action="Index" asp-controller="StudentManagement" class="btn btn-default">Back</a></span>
+

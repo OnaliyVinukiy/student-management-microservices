@@ -1,0 +1,13 @@
+global using WebApp.RESTClients;
+global using StudentSystem.WebApp.Models;
+global using StudentSystem.WebApp.ViewModels;
+global using StudentSystem.WebApp.Mappers;
+global using StudentSystem.WebApp.Commands;
+global using StudentSystem.Infrastructure.Messaging;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using System.ComponentModel.DataAnnotations;
+global using System.Net;
+global using Serilog;
+global using Polly;
+global using Refit;

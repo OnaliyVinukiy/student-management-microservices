@@ -1,0 +1,13 @@
+global using StudentSystem.EnrollmentEventHandler;
+global using StudentSystem.EnrollmentEventHandler.DataAccess;
+global using StudentSystem.EnrollmentEventHandler.Events;
+global using StudentSystem.EnrollmentEventHandler.Model;
+global using StudentSystem.Infrastructure.Messaging;
+global using StudentSystem.Infrastructure.Messaging.Configuration;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Polly;
+global using Serilog;
+global using Newtonsoft.Json.Linq;

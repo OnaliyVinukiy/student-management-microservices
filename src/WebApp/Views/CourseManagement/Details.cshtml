@@ -1,0 +1,31 @@
+﻿@model StudentSystem.WebApp.ViewModels.CourseManagementDetailsViewModel
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<h3 id="PageTitle">Course Management - details</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">License Number :</td>
+            <td><b>@Model.Course.CourseCode</b></td>
+        </tr>
+        <tr>
+            <td width="150">Brand :</td>
+            <td><b>@Model.Course.Brand</b></td>
+        </tr>
+        <tr>
+            <td width="150">Type :</td>
+            <td><b>@Model.Course.Type</b></td>
+        </tr>
+        <tr>
+            <td width="150">Owner :</td>
+            <td><b><a href='@(Url.Action("Details", "StudentManagement", new { id = Model.Course.OwnerId }))'>@Model.Owner</a></b></td>
+        </tr>
+    </tbody>
+</table>
+<span><a id="BackButton" asp-action="Index" asp-controller="CourseManagement" class="btn btn-default">Back</a></span>
+
+
+

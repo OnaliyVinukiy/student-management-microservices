@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Student Management System</h1>
+    <p class="lead">Welcome to the Student Management System, a modern web application built on a microservices architecture.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Student Management</h2>
+        <p>Register new students and view details of existing ones.</p>
+        <p><a class="btn btn-default" asp-controller="StudentManagement" asp-action="Index">Go to Students &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Course Management</h2>
+        <p>Create new courses and manage the course catalog.</p>
+        <p><a class="btn btn-default" asp-controller="CourseManagement" asp-action="Index">Go to Courses &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Enrollment</h2>
+        <p>Enroll students in available courses for the current academic term.</p>
+        <p><a class="btn btn-default" asp-controller="Enrollment" asp-action="Index">Go to Enrollment &raquo;</a></p>
+    </div>
+</div>

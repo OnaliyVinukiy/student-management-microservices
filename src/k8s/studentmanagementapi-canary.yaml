@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: studentmanagementapi
+  namespace: student-management-system
+spec:
+  host: studentmanagementapi
+  subsets:
+    - name: v1
+      labels:
+        version: "1.0"
+    - name: v2
+      labels:
+        version: "2.0"
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: studentmanagementapi-virtual-service
+  namespace: student-management-system
+spec:
+  hosts:
+    - studentmanagementapi
+  http:
+    - route:
+      - destination:
+          host: studentmanagementapi
+          subset: v1
+        weight: 75
+      - destination:
+          host: studentmanagementapi
+          subset: v2
+        weight: 25

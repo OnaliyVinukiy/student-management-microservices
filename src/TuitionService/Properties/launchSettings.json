@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TuitionService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
